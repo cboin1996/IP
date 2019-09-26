@@ -25,16 +25,17 @@ def getIp():
 def main(arguments):
     messager = Message.Messager()
     delay = float(sys.argv[1])
+    lastIp = getIp()
+    logger.info('Got ext. IP of %s, checking for change in %s hours' % (lastIp, delay))
     while True:
-        lastIp = getIp()
         time.sleep(delay*3600)
         currentIp = getIp()
         if lastIp != currentIp:
             logger.info("IP change detected (%s --> %s).  Sending update text." % (lastIp, currentIp))
-            messager.createSMS(currentIp)
+            messager.createSMS("Your ext. IP has changed from %s to --> %s." % (lastIp, currentIp))
         else:
             logger.info("No change in IP.. Last ext. Ip was: %s, current is: %s." % (lastIp, currentIp))
-
+        lastIp = currentIp
         
 if __name__=="__main__":
     
