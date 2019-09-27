@@ -33,7 +33,6 @@ def main(arguments):
         currentIp = getIp()
         # check for error on requests.. should only execute if wifi is up or requests were good.
         if lastIp != None and currentIp != None:
-            currentIp = lastIp
             if lastIp != currentIp:
                 logger.info("IP change detected (%s --> %s).  Sending update text." % (lastIp, currentIp))
                 messager.createSMS("Your ext. IP has changed from %s to --> %s." % (lastIp, currentIp))
