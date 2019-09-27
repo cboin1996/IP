@@ -19,24 +19,29 @@ def getIp():
         req = requests.get('https://api.ipify.org').text
         return req
     except:
-        logger.info("Request: %s, Could not connect to website" % (req))
+        logger.info("IP request failed.  Maybe wifi was down?")
+        return None
 
 
 def main(arguments):
     messager = Message.Messager()
     delay = float(sys.argv[1])
     lastIp = getIp()
-    logger.info('Got ext. IP of %s, checking for change in %s hours' % (lastIp, delay))
+    logger.info('Checking for change in %s hours' % (delay))
     while True:
         time.sleep(delay*3600)
         currentIp = getIp()
-        if lastIp != currentIp:
-            logger.info("IP change detected (%s --> %s).  Sending update text." % (lastIp, currentIp))
-            messager.createSMS("Your ext. IP has changed from %s to --> %s." % (lastIp, currentIp))
-        else:
-            logger.info("No change in IP.. Last ext. Ip was: %s, current is: %s." % (lastIp, currentIp))
-        lastIp = currentIp
-        
+        # check for error on requests.. should only execute if wifi is up or requests were good.
+        if lastIp != None and currentIp != None:
+            currentIp = lastIp
+            if lastIp != currentIp:
+                logger.info("IP change detected (%s --> %s).  Sending update text." % (lastIp, currentIp))
+                messager.createSMS("Your ext. IP has changed from %s to --> %s." % (lastIp, currentIp))
+            else:
+                logger.info("No change in IP.. Last ext. Ip was: %s, current is: %s." % (lastIp, currentIp))
+            lastIp = currentIp
+
+
 if __name__=="__main__":
-    
+
     main(sys.argv)
