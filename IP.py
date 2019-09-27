@@ -27,8 +27,11 @@ def main(arguments):
     messager = Message.Messager()
     delay = float(sys.argv[1])
     lastIp = getIp()
-    logger.info('Checking for change in %s hours' % (delay))
+    if lastIp != None:
+        logger.info('Got IP of %s' % (lastIp))
+
     while True:
+        logger.info('Checking for IP again in %s hours' % (sys.argv[1]))
         time.sleep(delay*3600)
         currentIp = getIp()
         # check for error on requests.. should only execute if wifi is up or requests were good.
