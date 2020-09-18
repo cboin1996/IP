@@ -12,7 +12,7 @@ class Messager:
         self.twil_num_key = "twilio number"
         self.user_num_key = "personal number"
 
-        self.initialize_settings
+        self.initialize_settings(self.pathToSettings)
 
 
     def initialize_settings(self, path):
