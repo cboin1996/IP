@@ -11,19 +11,22 @@ class Messager:
         self.auth_ssid_key = "auth token"
         self.twil_num_key = "twilio number"
         self.user_num_key = "personal number"
-        with open(self.pathToSettings, 'r') as in_file:
-            self.twilSettings = json.loads(in_file.read())
-            if self.twilSettings is None:
-                self.initialize_settings(self.pathToSettings)
+
+        self.initialize_settings
 
 
     def initialize_settings(self, path):
         settings = {}
-        for setting in [self.ssid_key, self.auth_ssid_key, self.twil_num_key, self.user_num_key]:
-            settings[setting] = input(f"Enter your {setting}: ")
-        with open(path, 'w') as f:
-            json.dump(settings, f)
-            print("Settings configured.")
+        if os.path.exists():
+            with open(self.pathToSettings, 'r') as in_file:
+                self.twilSettings = json.loads(in_file.read())
+        else:
+            for setting in [self.ssid_key, self.auth_ssid_key, self.twil_num_key, self.user_num_key]:
+                settings[setting] = input(f"Enter your {setting}: ")
+            with open(path, 'w') as f:
+                json.dump(settings, f)
+            self.twilSettings = settings
+            print(f"Settings loaded: {settings}")
 
     def createSMS(self, messageBody):
         client = Client(self.twilSettings["acct_sid"], self.twilSettings["auth_token"])

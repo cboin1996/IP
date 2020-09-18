@@ -1,2 +1,5 @@
 IPHistory.log
 acct.json
+#
+__pycache__
+.out
