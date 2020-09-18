@@ -17,7 +17,7 @@ class Messager:
 
     def initialize_settings(self, path):
         settings = {}
-        if os.path.exists():
+        if os.path.exists(path):
             with open(self.pathToSettings, 'r') as in_file:
                 self.twilSettings = json.loads(in_file.read())
         else:
