@@ -23,7 +23,6 @@ def getIp():
         logger.info("IP request failed.  Maybe wifi was down?")
         return None
 
-
 def main(arguments):
     messager = Message.Messager()
     delay = float(sys.argv[1])
