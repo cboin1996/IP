@@ -29,13 +29,13 @@ class Messager:
             print(f"Settings loaded: {settings}")
 
     def createSMS(self, messageBody):
-        client = Client(self.twilSettings["acct sid"], self.twilSettings["auth token"])
+        client = Client(self.twilSettings[self.ssid_key], self.twilSettings[self.auth_ssid_key])
 
         message = client.messages \
                         .create(
                                 body=messageBody,
-                                from_=self.twilSettings["twilio number"],
-                                to=self.twilSettings["personal number"]
+                                from_=self.twilSettings[self.twil_num_key],
+                                to=self.twilSettings[self.user_num_key]
                                 )
 
 if __name__=="__main__":
