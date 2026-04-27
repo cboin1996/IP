@@ -17,4 +17,4 @@ docker-build:
 	@docker compose build
 
 deploy:
-	@ssh -p 2222 ubuntu@10.0.0.91 "cd ~/proj/IP && git pull && docker compose up -d --build"
+	@ssh -p 2222 ubuntu@10.0.0.91 "cd ~/proj/IP && git pull && docker compose pull && docker compose up -d"
