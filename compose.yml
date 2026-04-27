@@ -1,5 +1,5 @@
 services:
   ip:
-    image: ghcr.io/cboin1996/ip:latest
+    image: cboin/ip:latest
     restart: unless-stopped
     env_file: .env
