@@ -1,5 +1,6 @@
-IPHistory.log
-acct.json
-#
-__pycache__
+.env
+__pycache__/
+*.pyc
 *.out
+acct.json
+IPHistory.log
